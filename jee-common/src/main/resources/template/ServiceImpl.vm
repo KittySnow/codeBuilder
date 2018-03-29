@@ -1,10 +1,10 @@
 package ${package_name}.service.impl;
 
 
-import ${package_name}.dao2.${model}Dao;
-import ${package_name}.model2.${model};
-import ${package_name}.model2.${model}Example;
-import ${package_name}.service.${model}Service;
+import cn.dlbdata.dangjian.admin.dao.mapper.${model}Dao;
+import cn.dlbdata.dangjian.admin.dao.model.${model};
+import cn.dlbdata.dangjian.admin.dao.model.${model}Example;
+import cn.dlbdata.dangjian.admin.service.${model}Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +39,13 @@ public class ${model}ServiceImpl implements ${model}Service {
     @Override
     public int insert(${model} ${mapper}) {
         ${mapper}Dao.insert(${mapper});
-        return ${mapper}.get${smallKey}();
+        return ${mapper}.get${smallKeyFirst}();
     }
     
     @Override
     public int insertSelective(${model} ${mapper}) {
         ${mapper}Dao.insertSelective(${mapper});
-        return ${mapper}.get${smallKey}();
+        return ${mapper}.get${smallKeyFirst}();
     }
     
     @Override

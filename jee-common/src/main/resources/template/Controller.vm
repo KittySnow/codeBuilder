@@ -6,10 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import cn.dlb.bim.web.ResultUtil;
-import cn.dlbdata.ad.model2.${model};
-import cn.dlbdata.ad.model2.${model}Example;
-import cn.dlbdata.ad.service.${model}Service;
+
+import cn.dlbdata.dangjian.admin.dao.model.${model};
+import cn.dlbdata.dangjian.admin.dao.model.${model}Example;
+import cn.dlbdata.dangjian.admin.service.${model}Service;
+import cn.dlbdata.dangjian.common.util.ResultUtil;
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 

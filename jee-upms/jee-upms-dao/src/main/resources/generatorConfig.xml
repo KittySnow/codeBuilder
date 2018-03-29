@@ -52,22 +52,23 @@
                         password="71257125" />
 
         <!-- model生成 -->
-        <javaModelGenerator targetPackage="cn.dlbdata.dangjian.admin.model" targetProject="G:/codeBuilder/jee-upms/jee-upms-dao/src/main/java" />
+        <javaModelGenerator targetPackage="cn.dlbdata.dangjian.admin.dao.model" targetProject="D:/codeBuilder/jee-upms/jee-upms-dao/src/main/java" />
 
         <!-- MapperXML生成 -->
-        <sqlMapGenerator targetPackage="cn.dlbdata.dangjian.admin.dao" targetProject="G:/codeBuilder/jee-upms/jee-upms-rpc-service/src/main/java" />
+        <sqlMapGenerator targetPackage="cn.dlbdata.dangjian.admin.dao" targetProject="D:/codeBuilder/jee-upms/jee-upms-rpc-service/src/main/java" />
 
         <!-- Mapper接口生成 -->
-        <javaClientGenerator targetPackage="cn.dlbdata.dangjian.admin.dao" targetProject="G:/codeBuilder/jee-upms/jee-upms-dao/src/main/java" type="XMLMAPPER" />
+        <javaClientGenerator targetPackage="cn.dlbdata.dangjian.admin.dao" targetProject="D:/codeBuilder/jee-upms/jee-upms-dao/src/main/java" type="XMLMAPPER" />
 
         <!-- 需要映射的表 -->
-                                    <table tableName="p_department" domainObjectName="PDepartment"    mapperName="PDepartmentDAO"></table>
-                                                <table tableName="p_feature" domainObjectName="PFeature"    mapperName="PFeatureDAO"></table>
-                                                <table tableName="p_party_module" domainObjectName="PPartyModule"    mapperName="PPartyModuleDAO"></table>
-                                                <table tableName="p_role" domainObjectName="PRole"    mapperName="PRoleDAO"></table>
-                                                <table tableName="p_role_feature" domainObjectName="PRoleFeature"    mapperName="PRoleFeatureDAO"></table>
-                                                <table tableName="p_score" domainObjectName="PScore"    mapperName="PScoreDAO"></table>
-                                                <table tableName="p_user" domainObjectName="PUser"    mapperName="PUserDAO">
+                                    <table tableName="p_department" domainObjectName="PDepartment"  mapperName="PDepartmentDao"></table>
+                                                <table tableName="p_feature" domainObjectName="PFeature"  mapperName="PFeatureDao"></table>
+                                                <table tableName="p_partymodule" domainObjectName="PPartymodule"  mapperName="PPartymoduleDao"></table>
+                                                <table tableName="p_partyproject" domainObjectName="PPartyproject"  mapperName="PPartyprojectDao"></table>
+                                                <table tableName="p_role" domainObjectName="PRole"  mapperName="PRoleDao"></table>
+                                                <table tableName="p_role_feature" domainObjectName="PRoleFeature"  mapperName="PRoleFeatureDao"></table>
+                                                <table tableName="p_score" domainObjectName="PScore"  mapperName="PScoreDao"></table>
+                                                <table tableName="p_user" domainObjectName="PUser"  mapperName="PUserDao">
                     <generatedKey column="userid" sqlStatement="MySql" identity="true"/>
                 </table>
                         </context>

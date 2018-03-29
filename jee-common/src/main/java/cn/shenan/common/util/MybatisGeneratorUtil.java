@@ -62,12 +62,10 @@ public class MybatisGeneratorUtil {
 		if (os.toLowerCase().startsWith("win")) {
 			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath().replaceFirst("/", "");
 			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath().replaceFirst("/", "");
-			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath().replaceFirst("/", "");
 			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath().replaceFirst("/", "");
 		} else {
 			generatorConfig_vm = MybatisGeneratorUtil.class.getResource(generatorConfig_vm).getPath();
 			service_vm = MybatisGeneratorUtil.class.getResource(service_vm).getPath();
-			serviceMock_vm = MybatisGeneratorUtil.class.getResource(serviceMock_vm).getPath();
 			serviceImpl_vm = MybatisGeneratorUtil.class.getResource(serviceImpl_vm).getPath();
 		}
 
@@ -77,6 +75,7 @@ public class MybatisGeneratorUtil {
 		targetProject = basePath + targetProject;
 		String sql = "SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = '" + database + "' AND table_name LIKE '" + table_prefix + "_%';";
 
+		System.out.println(sql);
 		System.out.println("========== 开始生成generatorConfig.xml文件 ==========");
 		List<Map<String, Object>> tables = new ArrayList<>();
 		try {
@@ -97,7 +96,7 @@ public class MybatisGeneratorUtil {
 
 			String targetProject_sqlMap = basePath + module + "/" + module + "-rpc-service";
 			context.put("tables", tables);
-			context.put("generator_javaModelGenerator_targetPackage", package_name + ".model");
+			context.put("generator_javaModelGenerator_targetPackage", package_name + ".dao.model");
 			context.put("generator_sqlMapGenerator_targetPackage", package_name + ".dao");
 			context.put("generator_javaClientGenerator_targetPackage", package_name + ".dao");
 			context.put("targetProject", targetProject);
@@ -149,6 +148,8 @@ public class MybatisGeneratorUtil {
 
 			if(null != HTML_FILE_NAME.get(tableName) ){
 
+				String smallkey = last_insert_id_tables.get(tableName).toLowerCase();
+
 				// 生成service
 				File serviceFile = new File(service);
 				if (!serviceFile.exists()) {
@@ -159,7 +160,8 @@ public class MybatisGeneratorUtil {
 					context.put("mapper", StringUtil.toLowerCaseFirstOne(model));
 					context.put("smallMapper",tableName);
 					context.put("last_insert_id_tables", last_insert_id_tables);
-					context.put("smallKey", last_insert_id_tables.get(tableName).toLowerCase());
+					context.put("smallKey", smallkey);
+					context.put("smallKeyFirst", StringUtil.toUpperCaseFirstOne(smallkey));
 					VelocityUtil.generate(service_vm, service, context);
 					System.out.println(service);
 				}
@@ -174,7 +176,8 @@ public class MybatisGeneratorUtil {
 					context.put("smallMapper", tableName);
 					context.put("ctime", ctime);
 					context.put("last_insert_id_tables", last_insert_id_tables);
-					context.put("smallKey", last_insert_id_tables.get(tableName).toLowerCase());
+					context.put("smallKey", smallkey);
+					context.put("smallKeyFirst", StringUtil.toUpperCaseFirstOne(smallkey));
 					VelocityUtil.generate(serviceImpl_vm, serviceImpl, context);
 					System.out.println(serviceImpl);
 				}
@@ -190,7 +193,8 @@ public class MybatisGeneratorUtil {
 					context.put("ctime", ctime);
 					context.put("smallMapper", tableName);
 					context.put("last_insert_id_tables", last_insert_id_tables);
-					context.put("smallKey", last_insert_id_tables.get(tableName).toLowerCase());
+					context.put("smallKey", smallkey);
+                    context.put("smallKeyFirst", StringUtil.toUpperCaseFirstOne(smallkey));
 					VelocityUtil.generate(controller_vm, controllerV, context);
 					System.out.println(controllerV);
 				}

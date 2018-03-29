@@ -28,7 +28,7 @@ public class Generator {
 
 	private static Map<String, String> HTML_FILE_NAME = new HashMap();
 	static {
-		HTML_FILE_NAME.put("p_user", "UserList");
+		HTML_FILE_NAME.put("p_user", "UserAdmin");
 	}
 
 	private static Map<String, String> FILE_CH_NAME = new HashMap();

@@ -63,11 +63,11 @@
         <!-- 需要映射的表 -->
         #foreach($table in $tables)
             #if($last_insert_id_tables.containsKey($!table.table_name) == true)
-                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"    mapperName="${table.model_name}DAO">
+                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"  mapperName="${table.model_name}Dao">
                     <generatedKey column="$!last_insert_id_tables.get($!table.table_name)" sqlStatement="MySql" identity="true"/>
                 </table>
             #else
-                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"    mapperName="${table.model_name}DAO"></table>
+                <table tableName="$!table.table_name" domainObjectName="$!table.model_name"  mapperName="${table.model_name}Dao"></table>
             #end
         #end
     </context>
