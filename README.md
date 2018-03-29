@@ -1,2 +1,1 @@
-# codeBuilder
-dangjian codeBuilder
+ 代码生成器, 供postgresql 使用,项目为bim-sms 
