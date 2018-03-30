@@ -217,7 +217,7 @@ public class MybatisGeneratorUtil {
 				JdbcUtil jdbcUtil = new JdbcUtil(jdbc_driver, jdbc_url, jdbc_username, AESUtil.AESDecode(jdbc_password));
 
 
-String sql2 = "select COLUMN_NAME,column_comment from INFORMATION_SCHEMA.Columns where table_name='"+tableName+"' and table_schema='"+database+"'";
+String sql2 = "select COLUMN_NAME,COLUMN_COMMENT from INFORMATION_SCHEMA.Columns where table_name='"+tableName+"' and table_schema='"+database+"'";
 				/*String sql2 = "SELECT col_description(a.attrelid,a.attnum) as comment,a.attname as name  FROM pg_class as c,pg_attribute as a where c.relname = '"+tableName+"' and a.attrelid = c.oid and a.attnum>0";*/
 
 				List<Map> resultComment2 = jdbcUtil.selectByParams(sql2, null);
@@ -231,9 +231,9 @@ String sql2 = "select COLUMN_NAME,column_comment from INFORMATION_SCHEMA.Columns
 				for (int j = 0; j < resultComment2.size(); j++) {
 					RenderColumn c = new RenderColumn();
 					Map t = resultComment2.get(j);
-					String cname =StringUtil.getString(t.get("name"));
+					String cname =StringUtil.getString(t.get("COLUMN_NAME"));
 					System.out.println(cname);
-					c.setAlias(StringUtil.getString(t.get("comment")));
+					c.setAlias(StringUtil.getString(t.get("COLUMN_COMMENT")));
 					c.setKeys(cname);
 					if(!mykey.equals(cname)){
 						renderList.add(c);
