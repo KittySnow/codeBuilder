@@ -24,7 +24,7 @@
             console.log(row);
         },
         'click .del$!html_file_name.get($!smallMapper)' : function (e, value, row, index) {
-            deleteAjax(row,'./${mapperLowerCase}/delete${smallName}ById','${key}','post');
+            deleteAjax(row,'./${mapperLowerCase}/deleteById','${key}','post');
         }
     };
 
