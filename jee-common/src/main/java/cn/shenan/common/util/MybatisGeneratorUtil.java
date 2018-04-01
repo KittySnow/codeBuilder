@@ -33,6 +33,9 @@ public class MybatisGeneratorUtil {
 
 	private static String edit_vm = "/template/Edit.vm";
 
+	private static String menujs_vm = "/template/menujs.vm";
+
+	private static String controllersFront_vm = "/template/controllersFront.vm";
 	/**
 	 * 根据模板生成generatorConfig.xml文件
 	 * @param jdbc_driver   驱动路径
@@ -208,8 +211,11 @@ public class MybatisGeneratorUtil {
 				}
 
 				String listHtml = ListHtmlPath+StringUtil.toLowerCaseFirstOne(HTML_FILE_NAME.get(tableName))+".html";
-				String addHtml = ListHtmlPath+"add"+model.replace("P","")+".html";
-				String editHtml = ListHtmlPath+"edit"+model.replace("P","")+".html";
+				String addHtml = ListHtmlPath+"add"+model.replaceFirst("P","")+".html";
+				String editHtml = ListHtmlPath+"edit"+model.replaceFirst("P","")+".html";
+
+				String menujsHtml = ListHtmlPath+"menu.js";
+				String controllersFrontHtml = ListHtmlPath+"controllers.js";
 
 
 				String mapper = StringUtil.toLowerCaseFirstOne(model);
@@ -257,7 +263,7 @@ String sql2 = "select COLUMN_NAME,COLUMN_COMMENT from INFORMATION_SCHEMA.Columns
 					context.put("mapperLowerCaseFirstOne", StringUtil.toLowerCaseFirstOne(mapper));
 					context.put("ctime", ctime);
 					context.put("smallMapper", tableName);
-					context.put("smallName", mapper.replace("p",""));
+					context.put("smallName", mapper.replaceFirst("p",""));
 					context.put("last_insert_id_tables", last_insert_id_tables);
 					context.put("key", mykey);
 					context.put("renderList",renderList);
@@ -279,7 +285,7 @@ String sql2 = "select COLUMN_NAME,COLUMN_COMMENT from INFORMATION_SCHEMA.Columns
 					context.put("mapperLowerCaseFirstOne", StringUtil.toLowerCaseFirstOne(mapper));
 					context.put("ctime", ctime);
 					context.put("smallMapper", tableName);
-					context.put("smallName", mapper.replace("p",""));
+					context.put("smallName", mapper.replaceFirst("p",""));
 					context.put("last_insert_id_tables", last_insert_id_tables);
 					context.put("key", mykey);
 					context.put("renderList",renderList);
@@ -301,8 +307,8 @@ String sql2 = "select COLUMN_NAME,COLUMN_COMMENT from INFORMATION_SCHEMA.Columns
 					context.put("mapperLowerCaseFirstOne", StringUtil.toLowerCaseFirstOne(mapper));
 					context.put("ctime", ctime);
 					context.put("smallMapper", tableName);
-					context.put("smallName", mapper.replace("p",""));
-					context.put("smallNameLowerCase", mapper.replace("p","").toLowerCase());
+					context.put("smallName", mapper.replaceFirst("p",""));
+					context.put("smallNameLowerCase", mapper.replaceFirst("p","").toLowerCase());
 					context.put("last_insert_id_tables", last_insert_id_tables);
 					context.put("key", mykey);
 					context.put("renderList",renderList);
@@ -312,6 +318,52 @@ String sql2 = "select COLUMN_NAME,COLUMN_COMMENT from INFORMATION_SCHEMA.Columns
 					VelocityUtil.generate(edit_vm, editHtml, context);
 					System.out.println(editHtmlFile);
 				}
+
+				//生成JS(不要问我为什么写那么lower 我生怕VelocityContext只能用一次)
+				File menujsFile = new File(menujsHtml);
+				if (!menujsFile.exists()) {
+					VelocityContext context = new VelocityContext();
+					context.put("package_name", package_name);
+					context.put("model", model);
+					context.put("modelNoP", model.replaceFirst("P",""));
+					context.put("mapper", mapper);
+					context.put("mapperLowerCase", mapper.toLowerCase());
+					context.put("mapperLowerCaseFirstOne", StringUtil.toLowerCaseFirstOne(mapper));
+					context.put("ctime", ctime);
+					context.put("smallMapper", tableName);
+					context.put("smallName", mapper.replaceFirst("p",""));
+					context.put("last_insert_id_tables", last_insert_id_tables);
+					context.put("key", mykey);
+					context.put("renderList",renderList);
+					context.put("html_file_name", HTML_FILE_NAME);
+					context.put("fileNameLowerCaseFirstOne", fileNameLowerCaseFirstOne);
+					context.put("chinaName",chinaName);
+					VelocityUtil.generate(menujs_vm, menujsHtml, context);
+					System.out.println(menujsFile);
+				}
+
+				//生成JS(不要问我为什么写那么lower 我生怕VelocityContext只能用一次)
+				File controllersFrontFile = new File(controllersFrontHtml);
+				if (!controllersFrontFile.exists()) {
+					VelocityContext context = new VelocityContext();
+					context.put("package_name", package_name);
+					context.put("model", model);
+					context.put("mapper", mapper);
+					context.put("mapperLowerCase", mapper.toLowerCase());
+					context.put("mapperLowerCaseFirstOne", StringUtil.toLowerCaseFirstOne(mapper));
+					context.put("ctime", ctime);
+					context.put("smallMapper", tableName);
+					context.put("smallName", mapper.replaceFirst("p",""));
+					context.put("last_insert_id_tables", last_insert_id_tables);
+					context.put("key", mykey);
+					context.put("renderList",renderList);
+					context.put("html_file_name", HTML_FILE_NAME);
+					context.put("fileNameLowerCaseFirstOne", fileNameLowerCaseFirstOne);
+					context.put("chinaName",chinaName);
+					VelocityUtil.generate(controllersFront_vm, controllersFrontHtml, context);
+					System.out.println(controllersFrontFile);
+				}
+
 			}
 		}
 		System.out.println("========== 结束生成Service ==========");

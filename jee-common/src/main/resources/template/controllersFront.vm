@@ -1,0 +1,12 @@
+function $!html_file_name.get($!smallMapper)Ctrl($scope, $http, $timeout ,$routeParams) {
+}
+function $!html_file_name.get($!smallMapper)EditCtrl($scope, $http, $timeout ,$routeParams) {
+    $scope.${key} = $routeParams.${key};
+    $http({
+        method: "GET",
+        url: "./../${mapperLowerCase}/queryById.do?${key}="+Number($scope.${key}),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    }).success(function (data,status) {
+        $scope.p${smallName}= data.data;
+    });
+}

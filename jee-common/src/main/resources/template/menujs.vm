@@ -1,0 +1,15 @@
+when('/$!html_file_name.get($!smallMapper)/${fileNameLowerCaseFirstOne}', {
+    templateUrl: 'pages/$!html_file_name.get($!smallMapper)/${fileNameLowerCaseFirstOne}.html',
+    controller: $!html_file_name.get($!smallMapper)Ctrl,
+    activetab: '$!html_file_name.get($!smallMapper)'
+}).
+when('/$!html_file_name.get($!smallMapper)/add${smallName}/', {
+    templateUrl: 'pages/$!html_file_name.get($!smallMapper)/add${modelNoP}.html',
+    controller: $!html_file_name.get($!smallMapper)Ctrl,
+    activetab: '$!html_file_name.get($!smallMapper)'
+}).
+when('/$!html_file_name.get($!smallMapper)/edit${smallName}/:${key}', {
+    templateUrl: 'pages/$!html_file_name.get($!smallMapper)/edit${modelNoP}.html',
+    controller: $!html_file_name.get($!smallMapper)EditCtrl,
+    activetab: '$!html_file_name.get($!smallMapper)'
+}).
